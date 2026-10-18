@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-kraft: #F4ECE1;
+    --bg-ticket: #FCF8F2;
+    --bg-ticket-stub: #EFE4D3;
+    --ink-black: #1E1B18;
+    --ink-muted: #6B6258;
+    --tag-lost: #D94825;
+    --tag-lost-light: #FCECE8;
+    --tag-lost-dark: #A93315;
+    --tag-found: #0E6251;
+    --tag-found-light: #E7F3F0;
+    --tag-found-dark: #09473A;
+    --kraft-border: #DECBB6;
+    --string-color: #8C6D4F;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-kraft);
+    color: var(--ink-black);
+    background-image: 
+      radial-gradient(#D5C4AF 0.75px, transparent 0.75px),
+      radial-gradient(#DECBB6 0.75px, var(--bg-kraft) 0.75px);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Bricolage Grotesque', 'Fraunces', Georgia, serif;
+    letter-spacing: -0.025em;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Rubber Stamp Aesthetics with Rough Ink Texture */
+.rubber-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  border-width: 2.5px;
+  border-style: solid;
+  border-radius: 6px;
+  padding: 0.2rem 0.7rem;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.08) 12%, transparent 13%),
+    radial-gradient(rgba(255, 255, 255, 0.3) 12%, transparent 13%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+  mask-image: radial-gradient(circle at 50% 50%, black 80%, rgba(0, 0, 0, 0.7) 100%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 80%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.stamp-lost {
+  color: #D94825;
+  border-color: #D94825;
+  background-color: rgba(217, 72, 37, 0.07);
+  transform: rotate(-3deg);
+}
+
+.stamp-found {
+  color: #0E6251;
+  border-color: #0E6251;
+  background-color: rgba(14, 98, 81, 0.08);
+  transform: rotate(2.5deg);
+}
+
+.stamp-returned {
+  color: #15803d;
+  border-color: #15803d;
+  background-color: rgba(22, 101, 52, 0.1);
+  transform: rotate(-4deg);
+}
+
+.stamp-review {
+  color: #B45309;
+  border-color: #B45309;
+  background-color: rgba(180, 83, 9, 0.08);
+  transform: rotate(1.5deg);
+}
+
+/* Ticket Perforation & Notches */
+.ticket-edge-left {
+  position: relative;
+}
+.ticket-edge-left::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -8px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: var(--bg-kraft);
+  border-radius: 50%;
+  box-shadow: inset -2px 0 3px rgba(0,0,0,0.08);
+}
+
+.ticket-perforation {
+  border-left: 2px dashed #D5C4AF;
+}
+
+/* Stamp Thump Signature Animation */
+@keyframes stampThump {
+  0% {
+    opacity: 0;
+    transform: scale(2.2) rotate(-15deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.92) rotate(3deg);
+  }
+  80% {
+    transform: scale(1.04) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1) rotate(-3deg);
+  }
+}
+
+.animate-stamp-thump {
+  animation: stampThump 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Tag Swing on Hover */
+@keyframes tagSwing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1.8deg); }
+  75% { transform: rotate(-1.5deg); }
+}
+
+.tag-card {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  transform-origin: top center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tag-card:hover {
+    transform: translateY(-4px) rotate(0.8deg);
+  }
+  .tag-card:nth-child(even):hover {
+    transform: translateY(-4px) rotate(-0.8deg);
+  }
+}
+
+/* Polaroid Photo Styling */
+.polaroid-frame {
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(30, 27, 24, 0.08), 0 1px 3px rgba(30, 27, 24, 0.05);
+  border: 1px solid #E6DCCD;
+  padding: 10px 10px 24px 10px;
+  position: relative;
+}
+
+.polaroid-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 70px;
+  height: 22px;
+  background: rgba(230, 215, 190, 0.7);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  backdrop-filter: blur(1px);
+  z-index: 10;
+}

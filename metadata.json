@@ -1,0 +1,8 @@
+{
+  "name": "Lost-Link",
+  "description": "Lost it? Link it back. Official Campus Lost & Found claim ticket network.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
